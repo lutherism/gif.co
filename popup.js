@@ -66,11 +66,11 @@ var gifGenerator = {
 	this.firstChild.setAttribute('style', "width: 90px")
 	this.setAttribute('style',"border: 1px solid white;");};
       frmt.onclick = function (){
-	this.setAttribute('style', "border: 2px solid red;");
+	this.setAttribute('style', "-webkit-animation-play-state: running;");
 	var sandbox = $('#sandbox').val("http://i.imgur.com/" + this.firstChild.id + ".gif").select();
         sandbox.display="visible";
 	document.execCommand('copy');
-	sandbox.diaply = "hidden";
+	sandbox.display = "hidden";
       };
       /*img.onclick = function () {
 	document.body.innerHTML = document.body.innerHTML + '<p><a href="'+this.src+'" target="_blank" >'+this.src+'</a><form style="margin-top: -35px; margin-left: -500px;"><input type="text" id="shortlink" value="'+this.src+'"></form></p>'

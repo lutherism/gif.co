@@ -1,32 +1,47 @@
-<doctype html>
+<!doctype html>
 <html>
   <head>
     <title>Getting Started Extension's Popup</title>
-    <a href='\popup.html'>Your Gifs</a></br>
-     <style>
+    <b id='01'><a href='\popup.html' style='width: 94x;'>Your Gifs</a></b></br>
+    <style>
       body {
         min-width: 290px;
         overflow-x: hidden;
-      }
-
-      img {
+      }   
+      div {
+        overflow: hidden;
         margin: 2px;
         border: 1px solid white;
         vertical-align: middle;
         width: 90px;
         height: 90px;
-      }
+        display:inline-block;
+        -webkit-animation: clickins 700ms;
+        -webkit-animation-play-state: paused;
+      }   
+      img {
+	z-index:1;
+        width: 90px;
+        height: 90px;
+      }   
+      @-webkit-keyframes clickins {
+        1% {border: 1px solid red;}
+        100% {border: 1px solid white;}
+      }   
     </style>
 
     <!--
       - JavaScript and HTML must be in separate files: see our Content Security
       - Policy documentation[1] for details and explanation.
-      -
+
+      -y
       - [1]: http://developer.chrome.com/extensions/contentSecurityPolicy.html
      -->
+    <script src="jquery-2.0.3.js"></script>
     <script src="selected.js"></script>
   </head>
   <body>
+    <textarea id="sandbox" style="position: fixed; left: -200px;"></textarea>  
   </body>
 </html>
 

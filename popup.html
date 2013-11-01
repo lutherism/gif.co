@@ -16,10 +16,16 @@
         width: 90px;
         height: 90px;
 	display:inline-block;
+	-webkit-animation: clickins 700ms;
+	-webkit-animation-play-state: paused;
       }	
       img {
         width: 90px;
         height: 90px;
+      }
+      @-webkit-keyframes clickins {
+	1% {border: 1px solid red;}
+	100% {border: 1px solid white;}
       }
     </style>
 
