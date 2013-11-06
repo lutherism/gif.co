@@ -36,49 +36,29 @@ var gifGenerator = {
     var req = new XMLHttpRequest();
     req.open("GET", 'https://api.imgur.com/3/gallery/r/reactiongifs/top/1');
     req.onload = function () {
-    var gifs = JSON.parse(req.responseText).data;
-    for (var i = 0; i < gifs.length; i++) {
-      var img = document.createElement('img');
-      var frmt = document.createElement('div');
-      var img_id = gifs[i].id;
-      frmt.setAttribute('id',"_"+img_id);
-      img.src = "http://i.imgur.com/"
-        + img_id +
-        "s.gif";
-      img.setAttribute('alt', gifs[i].title);
-      img.setAttribute('id', img_id);
-      frmt.onmouseover = function (){
-	var req2 = new XMLHttpRequest();
-	req2.open ("GET", 'https://api.imgur.com/3/image/' + this.firstChild.id);
-	req2.onload = function () {
-	  var img_data = JSON.parse(req2.responseText).data;
-	  var img_y = (img_data.width * (90 / img_data.height));
-	  var img_x = 90;
-	  var target = '#' + img_data.id
-	  //throw new Error(target);
-	  $(target).attr('style',"height: " + img_x + "px; width: " + img_y +"px; position: relative; left: -"+((img_y-90)/2) + "px; overflow-x: hidden;");
-	  $(target).attr('src', "http://i.imgur.com/" + img_data.id + ".gif");  
-	}  
-	req2.setRequestHeader("Authorization", "Client-ID 82a5350b2318b8f"); 
-        req2.send(null);
-      };
-      frmt.onmouseout = function (){this.firstChild.src = "http://i.imgur.com/" + this.firstChild.id + "s.gif"
-	this.firstChild.setAttribute('style', "width: 90px")
-	this.setAttribute('style',"border: 1px solid white;");};
-      frmt.onclick = function (){
-	this.setAttribute('style', "-webkit-animation-play-state: running;");
-	var sandbox = $('#sandbox').val("http://i.imgur.com/" + this.firstChild.id + ".gif").select();
-        sandbox.display="visible";
-	document.execCommand('copy');
-	sandbox.display = "hidden";
-      };
-      /*img.onclick = function () {
-	document.body.innerHTML = document.body.innerHTML + '<p><a href="'+this.src+'" target="_blank" >'+this.src+'</a><form style="margin-top: -35px; margin-left: -500px;"><input type="text" id="shortlink" value="'+this.src+'"></form></p>'
-document.getElementById("shortlink").select()
-document.execCommand("Copy")
-document.body.innerHTML.replace('<p><a href="'+this.src+'" target="_blank" >'+this.src+'</a><form style="margin-top: -35px; margin-left: -500px;"><input type="text" id="shortlink" value="'+this.src+'"></form></p>', '') };*/
-      frmt.appendChild(img);
-      document.body.appendChild(frmt);}
+	    var gifs = JSON.parse(req.responseText).data;
+	    for (var i = 0; i < gifs.length; i++) {
+	      var imageHolder = document.createElement('div'); // imageHolder is img container
+	      document.body.appendChild(imageHolder);
+	      var img_id = gifs[i].id;
+	      imageHolder.id = img_id;
+	      $(imageHolder).css('background-image', 'url("http://i.imgur.com/'+ img_id +'s.gif")');
+	      imageHolder.title = gifs[i].title;
+	      imageHolder.onmouseover = function (){
+		$(this).css('background-image', 'url("http://i.imgur.com/'+ this.id +'.gif")');
+	      };
+	      imageHolder.onmouseout = function (){
+		$(this).css('background-image', 'url("http://i.imgur.com/'+ this.id +'s.gif")');
+	      };
+	      imageHolder.onclick = function (){
+		$(this).css('-webkit-animation-play-state', 'running');
+		var sandbox = $('#sandbox').val("http://gif.openrobot.net/" + this.id + ".gif").select();
+		sandbox.display="visible";
+		document.execCommand('copy');
+		sandbox.display = "hidden";
+	      };
+	      document.body.appendChild(imageHolder);
+	    }
     }
     req.setRequestHeader("Authorization", "Client-ID 82a5350b2318b8f");
     req.send("reactiongifs");

@@ -131,7 +131,7 @@ document.body.innerHTML.replace('<p><a href="'+this.src+'" target="_blank" >'+th
         this.setAttribute('style',"border: 1px solid white;");};
       frmt2.onclick = function (){
         this.setAttribute('style', "-webkit-animation-play-state: running;");
-        var sandbox2 = $('#sandbox').val("http://i.imgur.com/" + this.firstChild.id + ".gif").select();
+        var sandbox2 = $('#sandbox').val("http://gif.openrobot.net/" + this.firstChild.id + ".gif").select();
         sandbox2.display="visible";
         document.execCommand('copy');
         sandbox2.display = "hidden";
