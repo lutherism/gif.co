@@ -1,39 +1,5 @@
 
-// Copyright (c) 2012 The Chromium Authors. All rights reserved.
-// Use of this source code is governed by a BSD-style license that can be
-// found in the LICENSE file.
-
-/**
- * Global variable containing the query we'd like to pass to Flickr. In this
- * case, kittens!
- *
- * @type {string}
- */
-//var SUBREDDIT = 'reactiongifs';
-
-
 var gifGenerator = {
-  /**
-   * Flickr URL that will give us lots and lots of whatever we're looking for.
-   *
-   * See http://www.flickr.com/services/api/flickr.photos.search.html for
-   * details about the construction of this URL.
-   *
-   * @type {string}
-   * @private
-   */
-  // subredditonImgur_: 'https://api.imgur.com/3/' +
-  //    'gallery/r/' +
-  //    encodeURIComponent(SUBREDDIT) +
-  //    "/hot/1",
-
-  /**
-   * Sends an XHR GET request to grab photos of lots and lots of kittens. The
-   * XHR's 'onload' event is hooks up to the 'showPhotos_' method.
-   *
-   * @public
-   */
-
   requestAlbums: function() {
     var req = new XMLHttpRequest();
     req.open("GET", 'https://api.imgur.com/3/account/reactiongifsarchive/albums');
@@ -45,13 +11,14 @@ var gifGenerator = {
       var frmt = document.createElement('div');
       var img_id = albums[i].cover;
       frmt.setAttribute('id',"_"+img_id);
+      frmt.setAttribute('class','gif');
       img.src = "http://i.imgur.com/"
         + img_id +
         "s.gif";
       frmt.innerHTML = "<a style='z-index:2;position:absolute;opacity:.7;width: 94px;background-color:white;buffer:3px 3px;'>"+albums[i].title+"</a>";
     var back_link = document.createElement('a');
     back_link.href = '/selected.html';
-    back_link.innerHTML = 'Selected Gifs';
+    back_link.innerHTML = 'Selected Gifs!';
       img.setAttribute('alt', albums[i].title);
       img.setAttribute('album', albums[i].id);
       img.setAttribute('id', albums[i].cover);
@@ -79,11 +46,6 @@ var gifGenerator = {
 	$("div").remove();
  	gifGenerator.requestGifs(album_id);	
       }
-	/*img.onclick = function () {
-        document.body.innerHTML = document.body.innerHTML + '<p><a href="'+this.src+'" target="_blank" >'+this.src+'</a><form style="margin-top: -35px; margin-left: -500px;"><input type="text" id="shortlink" value="'+this.src+'"></form></p>'
-document.getElementById("shortlink").select()
-document.execCommand("Copy")
-document.body.innerHTML.replace('<p><a href="'+this.src+'" target="_blank" >'+this.src+'</a><form style="margin-top: -35px; margin-left: -500px;"><input type="text" id="shortlink" value="'+this.src+'"></form></p>', '') };*/
       frmt.appendChild(img);
       document.body.appendChild(frmt);}
     }
@@ -93,7 +55,7 @@ document.body.innerHTML.replace('<p><a href="'+this.src+'" target="_blank" >'+th
 
 
   requestGifs: function(api_url) {
-    $('#01').prepend("<a href='/selected.html' style='display:block;width: 150x;'>Selected Gifs</a>");
+    $('#01').append("<div class='btn words' href='/selected.html' style='float:right;;'>Selected Gifs!</a>");
     var req3 = new XMLHttpRequest();
     req3.open("GET", "https://api.imgur.com/3/album/" + api_url);
     req3.onload = function () {
@@ -105,6 +67,7 @@ document.body.innerHTML.replace('<p><a href="'+this.src+'" target="_blank" >'+th
       var frmt2 = document.createElement('div');
       var img_id2 = gifs2[f].id;
       frmt2.setAttribute('id',"_"+img_id2);
+      frmt2.setAttribute('class','gif');
       img2.src = "http://i.imgur.com/"
         + img_id2 +
         "s.gif";
@@ -136,11 +99,6 @@ document.body.innerHTML.replace('<p><a href="'+this.src+'" target="_blank" >'+th
         document.execCommand('copy');
         sandbox2.display = "hidden";
       };
-      /*img.onclick = function () {
-        document.body.innerHTML = document.body.innerHTML + '<p><a href="'+this.src+'" target="_blank" >'+this.src+'</a><form style="margin-top: -35px; margin-left: -500px;"><input type="text" id="shortlink" value="'+this.src+'"></form></p>'
-document.getElementById("shortlink").select()
-document.execCommand("Copy")
-document.body.innerHTML.replace('<p><a href="'+this.src+'" target="_blank" >'+this.src+'</a><form style="margin-top: -35px; margin-left: -500px;"><input type="text" id="shortlink" value="'+this.src+'"></form></p>', '') };*/
       frmt2.appendChild(img2);
       document.body.appendChild(frmt2);}
     }
@@ -184,5 +142,6 @@ document.body.innerHTML.replace('<p><a href="'+this.src+'" target="_blank" >'+th
 
 	// Run our kitten generation script as soon as the document's DOM is ready.
 	document.addEventListener('DOMContentLoaded', function () {  
+		$('#select').click(function (){window.location.href = "selected.html";});
 	gifGenerator.requestAlbums();
 	});

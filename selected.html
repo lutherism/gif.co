@@ -2,33 +2,8 @@
 <html>
   <head>
     <title>Getting Started Extension's Popup</title>
-    <b id='01'><a href='\popup.html' style='width: 94x;'>Your Gifs</a></b></br>
-    <style>
-      body {
-        min-width: 290px;
-        overflow-x: hidden;
-      }   
-      div {
-        overflow: hidden;
-        margin: 2px;
-        border: 1px solid white;
-        vertical-align: middle;
-        width: 90px;
-        height: 90px;
-        display:inline-block;
-        -webkit-animation: clickins 700ms;
-        -webkit-animation-play-state: paused;
-      }   
-      img {
-	z-index:1;
-        width: 90px;
-        height: 90px;
-      }   
-      @-webkit-keyframes clickins {
-        1% {border: 1px solid red;}
-        100% {border: 1px solid white;}
-      }   
-    </style>
+    <div href='/popup.html' class="btn words">Your Gifs</div></b></br>
+		<link type=i'text/css' rel="stylesheet" href='/gif.css'>
 
     <!--
       - JavaScript and HTML must be in separate files: see our Content Security
@@ -39,6 +14,8 @@
      -->
     <script src="jquery-2.0.3.js"></script>
     <script src="selected.js"></script>
+<link href='/gif.css' rel='stylesheet' type='text/css'>
+<link href='http://fonts.googleapis.com/css?family=Open+Sans:300' rel='stylesheet' type='text/css'>
   </head>
   <body>
     <textarea id="sandbox" style="position: fixed; left: -200px;"></textarea>  
