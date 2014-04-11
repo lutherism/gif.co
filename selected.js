@@ -55,7 +55,8 @@ var gifGenerator = {
 
 
   requestGifs: function(api_url) {
-    $('#01').append("<div class='btn words' href='/selected.html' style='float:right;;'>Selected Gifs!</a>");
+    $('body').append("<div class='btn words'>Selected Gifs!</a>");
+		$('.btn').click(function() {window.location='selected.html'});
     var req3 = new XMLHttpRequest();
     req3.open("GET", "https://api.imgur.com/3/album/" + api_url);
     req3.onload = function () {
